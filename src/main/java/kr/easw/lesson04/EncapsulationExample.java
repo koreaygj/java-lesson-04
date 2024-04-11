@@ -38,6 +38,9 @@ public class EncapsulationExample {
         }
 
         public void setRealFuelEfficiency(double realFuelEfficiency) {
+            if(this.realFuelEfficiency != realFuelEfficiency){
+                throw new IllegalArgumentException("연비 조작이 확인되었습니다.");
+            }
             this.realFuelEfficiency = realFuelEfficiency;
         }
     }

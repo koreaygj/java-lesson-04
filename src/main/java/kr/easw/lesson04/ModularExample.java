@@ -57,8 +57,8 @@ public class ModularExample {
      * <p>
      * 상속하여 구현한 Vehicle 객체를 반환해야 합니다.
      */
-    public static Vehicle getVehicle() {
-        throw new RuntimeException("이 코드 라인을 지우고, 이곳에서 작성하십시오.");
+    public static  Vehicle  getVehicle()  {
+        return new SolaCar();
     }
 
     // 해당 클래스를 상속하여 구현하여야 합니다.
@@ -75,6 +75,28 @@ public class ModularExample {
         // 이 메서드를 통해 조금 더 나은 결과를 도출할 수 있습니다.
         public abstract void onTick(int currentTick, int fuel);
     }
+    static public class SolaCar extends Vehicle {
+        @Override
+        public Energy getEnergy() {
+            return new SunlightEnergy();
+        }
+
+        @Override
+        public  VehicleType getType() {
+            return new Car();
+        }
+
+        @Override
+        public void onTick(int currentTick, int fuel) {
+            if(currentTick % 2 != 0){
+//                충전 에너지 불러오기
+            getEnergy().createEnergy(currentTick);
+            }else{
+
+                getEnergy().fuelUsage();
+            }
+        }
+    }
 
 
     static interface VehicleType {
@@ -82,6 +104,7 @@ public class ModularExample {
 
         int tickModify();
     }
+
 
     static class Bike implements VehicleType {
         @Override
